@@ -1,12 +1,13 @@
-package Code;
+package BaseCode;
 import com.relevantcodes.extentreports.LogStatus;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.api.Endpoints;
-import org.api.Payloads;
-import org.api.Variables;
+import org.api.Endpoints.Endpoints;
+import org.api.PayLoads.Payloads;
+import org.api.Variables.Variables;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.ExtentReportListner;
@@ -14,7 +15,8 @@ import utils.ExtentReportListner;
 import static io.restassured.RestAssured.given;
 @Listeners(ExtentReportListner.class)
 public class BaseCode extends ExtentReportListner {
-//    public static String store;
+    public static String store;
+
 
     Endpoints ep = new Endpoints();
     Payloads pl = new Payloads();
@@ -32,8 +34,8 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
     }
 
     @Test
@@ -63,8 +65,8 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
 
     }
 
@@ -79,8 +81,8 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
 
     }
 
@@ -94,8 +96,8 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
     }
 
     @Test
@@ -107,14 +109,16 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
 
 
     }
 
+    //Post
+
     @Test
-    public void POST_Create_User()
+    void POST_Create_User()
     {
 
         test.log(LogStatus.INFO, "My test is starting....");
@@ -124,7 +128,7 @@ public class BaseCode extends ExtentReportListner {
                 .body(pl.Create_User())
                 .when()
                 .post(ep.POST_Create_User)
-                .then()
+                .then().contentType(ContentType.JSON)
                 .extract().response();
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
@@ -134,11 +138,9 @@ public class BaseCode extends ExtentReportListner {
         System.out.println(response.getStatusCode());
         System.out.println(response.getTime());
         JsonPath jsonPathEvaluator = response.jsonPath();
-        String store = jsonPathEvaluator.get("name");
+        store = jsonPathEvaluator.get("name");
         System.out.println(store);
 
-//        Assertions.assertEquals("morpheus", response.jsonPath().getString("name"));
-//        Assertions.assertEquals("leader", response.jsonPath().getString("job"));
 
 
     }
@@ -146,11 +148,13 @@ public class BaseCode extends ExtentReportListner {
     @Test
     void PUT_Update_User()
     {
+
         test.log(LogStatus.INFO, "My test is starting....");
 
         RequestSpecification httpRequest = RestAssured.given().header("Content-Type", "application/json");
         Response response = httpRequest.body(pl.Update_User())
                 .put(ep.PUT_Update_User);
+
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
@@ -161,12 +165,15 @@ public class BaseCode extends ExtentReportListner {
 
 
 
+
     }
 
     @Test
     void Patch_Update_User()
     {
         test.log(LogStatus.INFO, "My test is starting....");
+
+
         RequestSpecification httpRequest = RestAssured.given().header("Content-Type", "application/json");
         Response response = httpRequest.body(pl.Patch_Update_User())
                 .patch(ep.Patch_Update_User);
@@ -174,25 +181,30 @@ public class BaseCode extends ExtentReportListner {
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
 
-//        System.out.println(res.getBody().asString());
-//        System.out.println("The Response code - " + res.getStatusCode());
+        System.out.println(response.getBody().asString());
+        System.out.println("The Response code - " + response.getStatusCode());
 
     }
 
     @Test
     void Delete_Single_User()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
         RequestSpecification httpRequest = given();
         Response response = httpRequest.delete(ep.Delete_Single_User);
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
 
     }
 
     @Test
     void Post_Register_User_Success_full()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
 
         Response response = given()
@@ -203,11 +215,12 @@ public class BaseCode extends ExtentReportListner {
                 .post(ep.Post_Register_User_Success_full)
                 .then()
                 .extract().response();
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
 
-//        System.out.println(response.getBody().asString());
+        System.out.println(response.getBody().asString());
 
-//        Assertions.assertEquals(v.name, response.jsonPath().getString("name"));
-//        Assertions.assertEquals("leader", response.jsonPath().getString("job"));
 
 
     }
@@ -215,6 +228,7 @@ public class BaseCode extends ExtentReportListner {
     @Test
     void Post_Register_User_Un_Success_full()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
         Response response = given()
                 .header("Content-type", "application/json")
@@ -224,8 +238,10 @@ public class BaseCode extends ExtentReportListner {
                 .post(ep.Post_Register_User_Un_Success_full)
                 .then()
                 .extract().response();
-
-//        System.out.println(response.getBody().asString());
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
+        System.out.println(response.getBody().asString());
 
 
 
@@ -236,6 +252,7 @@ public class BaseCode extends ExtentReportListner {
     @Test
     void Post_Login_User_Success_full()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
         Response response = given()
                 .header("Content-type", "application/json")
@@ -245,6 +262,9 @@ public class BaseCode extends ExtentReportListner {
                 .post(ep.Post_Login_User_Success_full)
                 .then()
                 .extract().response();
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
 
 //        System.out.println(response.getBody().asString());
 
@@ -256,6 +276,7 @@ public class BaseCode extends ExtentReportListner {
     @Test
     void Post_Login_User_UnSuccess_full()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
 
         Response response = given()
@@ -266,8 +287,11 @@ public class BaseCode extends ExtentReportListner {
                 .post(ep.Post_Login_User_Un_Success_full)
                 .then()
                 .extract().response();
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
 
-//        System.out.println(response.getBody().asString());
+        System.out.println(response.getBody().asString());
 
 
 
@@ -276,11 +300,18 @@ public class BaseCode extends ExtentReportListner {
     @Test
     void Get_Delayed_Response_Users()
     {
+        test.log(LogStatus.INFO, "My test is starting....");
 
         RequestSpecification httpRequest = given();
         Response response = httpRequest.get(ep.Get_Delayed_Response_Users);
-//        System.out.println(response.getBody().asString());
-//        System.out.println(response.getStatusLine());
+        test.log(LogStatus.INFO,response.getBody().asString());
+        test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
+        test.log(LogStatus.INFO,"Response time is "+ response.getTime());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getStatusLine());
     }
+
+
+
 
 }
