@@ -1,45 +1,50 @@
 package BaseCode;
+
 import com.relevantcodes.extentreports.LogStatus;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.api.Endpoints.Endpoints;
 import org.api.PayLoads.Payloads;
 import org.api.Variables.Variables;
+
+import org.junit.Test;
+
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+
 import utils.ExtentReportListner;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertNotNull;
+
 @Listeners(ExtentReportListner.class)
 public class BaseCode extends ExtentReportListner {
-    public static String store;
-
 
     Endpoints ep = new Endpoints();
     Payloads pl = new Payloads();
     Variables v = new Variables();
-    public String BaseUrl = RestAssured.baseURI = "https://reqres.in/";
+
+    String BaseUrl = RestAssured.baseURI = "https://reqres.in/";
 
 
     @Test
-    void Get_ListUsers()
+    public void Get_ListUsers()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
-        RequestSpecification httpRequest = given();
+        RequestSpecification httpRequest = given().log().all();
         Response response = httpRequest.get(ep.Get_List_Users);
         test.log(LogStatus.INFO,response.getBody().asString());
         test.log(LogStatus.INFO,"My Status code is "+response.getStatusCode());
         test.log(LogStatus.INFO,"Response time is "+ response.getTime());
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusLine());
+        assertNotNull(response,"List is Not Empty");
     }
 
     @Test
-    void Get_SingleUser()
+    public void Get_SingleUser()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -56,7 +61,7 @@ public class BaseCode extends ExtentReportListner {
 
 
     @Test
-    void Get_Single_User_Not_Found()
+    public void Get_Single_User_Not_Found()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -72,7 +77,7 @@ public class BaseCode extends ExtentReportListner {
 
 
     @Test
-    void Get_List_Resource()
+    public void Get_List_Resource()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -87,7 +92,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Get_Single_Resource()
+    public void Get_Single_Resource()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -101,7 +106,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Get_Single_Resource_Not_Found()
+    public void Get_Single_Resource_Not_Found()
     {
         test.log(LogStatus.INFO, "My test is starting....");
         RequestSpecification httpRequest = given();
@@ -118,7 +123,7 @@ public class BaseCode extends ExtentReportListner {
     //Post
 
     @Test
-    void POST_Create_User()
+    public void POST_Create_User()
     {
 
         test.log(LogStatus.INFO, "My test is starting....");
@@ -137,16 +142,13 @@ public class BaseCode extends ExtentReportListner {
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusCode());
         System.out.println(response.getTime());
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        store = jsonPathEvaluator.get("name");
-        System.out.println(store);
 
 
 
     }
 
     @Test
-    void PUT_Update_User()
+    public void PUT_Update_User()
     {
 
         test.log(LogStatus.INFO, "My test is starting....");
@@ -169,7 +171,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Patch_Update_User()
+    public void Patch_Update_User()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -187,7 +189,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Delete_Single_User()
+    public void Delete_Single_User()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -202,7 +204,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Post_Register_User_Success_full()
+    public void Post_Register_User_Success_full()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -226,7 +228,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Post_Register_User_Un_Success_full()
+    public void Post_Register_User_Un_Success_full()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -250,7 +252,7 @@ public class BaseCode extends ExtentReportListner {
 
 
     @Test
-    void Post_Login_User_Success_full()
+    public void Post_Login_User_Success_full()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -274,7 +276,7 @@ public class BaseCode extends ExtentReportListner {
 
 
     @Test
-    void Post_Login_User_UnSuccess_full()
+    public void Post_Login_User_UnSuccess_full()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
@@ -298,7 +300,7 @@ public class BaseCode extends ExtentReportListner {
     }
 
     @Test
-    void Get_Delayed_Response_Users()
+    public void Get_Delayed_Response_Users()
     {
         test.log(LogStatus.INFO, "My test is starting....");
 
