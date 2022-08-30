@@ -1,7 +1,5 @@
 package org.api.Variables;
 
-import io.restassured.RestAssured;
-
 public class Variables {
 
     public int page = 2;
@@ -18,6 +16,16 @@ public class Variables {
     public String password = "pistol";
 
     public static String store;
+
+
+//    public static void main(String[] args) throws Exception{
+//        FileInputStream fis = new FileInputStream("src/main/resources/config.properties");
+//        Properties prop = new Properties();
+//        prop.load(fis);
+//        baseurl = prop.getProperty("baseurl");
+//
+//    }
+
 
 
 

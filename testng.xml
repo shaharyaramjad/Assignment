@@ -4,9 +4,13 @@
 <suite name="Rest Assured Framework">
     <test name="Rest Assured Framework" group-by-instances="true">
         <classes>
-            <class name="test.java.BaseCode.BaseCode.java">
+            <class name="BaseCode.BaseCode">
                 <methods>
                     <include name="Get_ListUsers"/>
+                    <include name="Get_SingleUser"/>
+                    <include name="POST_Create_User"/>
+                    <include name="PUT_Update_User"/>
+                    <include name="Delete_Single_User"/>
 
 
                 </methods>

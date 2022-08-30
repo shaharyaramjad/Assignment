@@ -28,48 +28,5 @@ public class Payloads {
     }
 
 
-    public String Patch_Update_User(){
-        return "{\n" +
-                "    \"name\": \""+ store +"\",\n" +
-                "    \"job\": \"zion resident\"\n" +
-                "}";
-
-    }
-
-    public String Register_User() {
-        return "{\n" +
-                "    \"email\": \""+ v.email+"\",\n" +
-                "    \"password\": \""+v.password+"\"\n" +
-                "}";
-
-    }
-
-    public String Register_User_Unsuccess() {
-        return "{\n" +
-                "    \"email\": \""+v.email+"\"\n" +
-                "}";
-    }
-
-    public String Login_User_Success(){
-        return "{\n" +
-                "    \"email\": \""+v.email+"\",\n" +
-                "    \"password\": \""+v.password+"\"\n" +
-                "}";
-    }
-
-    public String Login_User_UnSuccessfull() {
-        return "{\n" +
-                "    \"email\": \""+v.email+"\"\n" +
-                "}";
-    }
-
-
-
-
-
-
-
-
-
 
 }
